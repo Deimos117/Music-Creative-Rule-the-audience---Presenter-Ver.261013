@@ -55,6 +55,9 @@ function audioFilesPlugin(): Plugin {
 
 export default defineConfig(() => {
   return {
+    // 👇 GitHub Pages 배포를 위한 base 경로 추가
+    base: '/Music-Creative-Rule-the-audience---Presenter-Ver.261013/',
+    
     plugins: [react(), tailwindcss(), audioFilesPlugin()],
     resolve: {
       alias: {
@@ -70,4 +73,3 @@ export default defineConfig(() => {
     },
   };
 });
-

@@ -106,8 +106,8 @@ export default function App() {
           >
             <div className="w-full h-full pixel-inner-frame bg-black flex items-center justify-center overflow-hidden pointer-events-none">
               <img
-                src="/QRImage/26.MCL.Audience.png"
-                alt="26.MCL.Audience"
+                src={`${import.meta.env.BASE_URL}QRImage/26.MCL.Audience.png`}
+                alt="QR코드"
                 className="w-full h-full object-contain [image-rendering:pixelated]"
               />
             </div>
