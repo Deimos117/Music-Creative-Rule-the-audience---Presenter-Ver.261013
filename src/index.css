@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'NeoDunggeunmo';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.3/NeoDunggeunmo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  font-family: 'NeoDunggeunmo', 'Press Start 2P', monospace;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000000;
+  color: #ffffff;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* 8-bit Monochrome Dot Matrix Background (White dots opacity reduced by 75% -> 0.25) */
+.pixel-dot-background {
+  background-color: #000000;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.25) 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
+  background-position: 0 0;
+}
+
+/* CRT Scanline Overlay Effect for 8-bit Arcade aesthetic */
+.scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.4) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+/* 8-bit Pixel Border Box */
+.pixel-box {
+  background-color: #000000;
+  position: relative;
+  box-shadow: 
+    -4px 0 0 0 #ffffff,
+    4px 0 0 0 #ffffff,
+    0 -4px 0 0 #ffffff,
+    0 4px 0 0 #ffffff,
+    -8px 0 0 0 #000000,
+    8px 0 0 0 #000000,
+    0 -8px 0 0 #000000,
+    0 8px 0 0 #000000,
+    -4px -4px 0 0 #ffffff,
+    4px -4px 0 0 #ffffff,
+    -4px 4px 0 0 #ffffff,
+    4px 4px 0 0 #ffffff;
+}
+
+/* Inner Pixel Accent for the image space */
+.pixel-inner-frame {
+  border: 2px dashed #ffffff;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Music Creative Lab",
+  "description": "흑백 모노크롬 8Bit 도트 대기 화면",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
