@@ -79,7 +79,7 @@ export default function AudioVisualizer({ onResetToHome }: AudioVisualizerProps)
 
   // Setup Audiofile/Ready.mp3
   useEffect(() => {
-    const audio = new Audio('/Audiofile/Ready.mp3');
+    const audio = new Audio(`${import.meta.env.BASE_URL}Audiofile/Ready.mp3`);
     audio.preload = 'auto';
     audio.addEventListener('ended', handleAudioEnd);
     audioElementRef.current = audio;
