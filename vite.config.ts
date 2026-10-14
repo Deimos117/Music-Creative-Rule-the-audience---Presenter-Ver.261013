@@ -34,16 +34,22 @@ function audioFilesPlugin(): Plugin {
       });
 
       server.middlewares.use('/Audiofile', (req, res, next) => {
-        const fileName = req.url?.replace(/^\//, '') || '';
-        const possiblePaths = [
-          path.resolve(process.cwd(), 'public/Audiofile', fileName),
-          path.resolve(process.cwd(), 'Audiofile', fileName),
+        const fileName = (req.url?.replace(/^\//, '') || '').split('?')[0];
+        const possibleDirs = [
+          path.resolve(process.cwd(), 'public/Audiofile'),
+          path.resolve(process.cwd(), 'Audiofile'),
         ];
-        for (const filePath of possiblePaths) {
-          if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
-            const isMp3 = filePath.toLowerCase().endsWith('.mp3');
+        for (const dir of possibleDirs) {
+          if (!fs.existsSync(dir)) continue;
+          let targetPath = path.resolve(dir, fileName);
+          if (!fs.existsSync(targetPath) || !fs.statSync(targetPath).isFile()) {
+            const match = fs.readdirSync(dir).find((f) => f.toLowerCase() === fileName.toLowerCase());
+            if (match) targetPath = path.resolve(dir, match);
+          }
+          if (fs.existsSync(targetPath) && fs.statSync(targetPath).isFile()) {
+            const isMp3 = targetPath.toLowerCase().endsWith('.mp3');
             res.setHeader('Content-Type', isMp3 ? 'audio/mpeg' : 'audio/wav');
-            fs.createReadStream(filePath).pipe(res);
+            fs.createReadStream(targetPath).pipe(res);
             return;
           }
         }
