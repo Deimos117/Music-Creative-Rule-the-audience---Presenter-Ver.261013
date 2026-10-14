@@ -77,9 +77,9 @@ export default function AudioVisualizer({ onResetToHome }: AudioVisualizerProps)
     return t;
   };
 
-  // Setup Audiofile/Ready.mp3
+  // Setup Audiofile/Thisthing.wav
   useEffect(() => {
-    const audio = new Audio(`${import.meta.env.BASE_URL}Audiofile/Ready.mp3`);
+    const audio = new Audio(`${import.meta.env.BASE_URL}Audiofile/Thisthing.wav`);
     audio.preload = 'auto';
     audio.addEventListener('ended', handleAudioEnd);
     audioElementRef.current = audio;
@@ -144,7 +144,7 @@ export default function AudioVisualizer({ onResetToHome }: AudioVisualizerProps)
     if (isEndingRef.current) return;
     isEndingRef.current = true;
 
-    // Ready.mp3 음원 강제 끝맞춤하여 스킵
+    // Thisthing.wav 음원 강제 끝맞춤하여 스킵
     if (audioElementRef.current) {
       audioElementRef.current.pause();
       try {
@@ -188,7 +188,7 @@ export default function AudioVisualizer({ onResetToHome }: AudioVisualizerProps)
     setStatusText('Drop 타이밍에 맞춰 버튼을 눌러주세요!');
     setIsPlaying(true);
 
-    // 2. Setup AudioContext and Analyser connected to Ready.mp3
+    // 2. Setup AudioContext and Analyser connected to Thisthing.wav
     try {
       const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (!audioContextRef.current) {
@@ -278,7 +278,7 @@ export default function AudioVisualizer({ onResetToHome }: AudioVisualizerProps)
           dataArray[i] = Math.min(255, Math.floor(avg * 1.3));
         }
       } else {
-        // Idle subtle dot pulse before Ready.mp3 plays
+        // Idle subtle dot pulse before Thisthing.wav plays
         for (let i = 0; i < barCount; i++) {
           const wave = Math.sin(frame * 0.05 + i * 0.4) * 16 + 20;
           dataArray[i] = Math.max(0, Math.min(255, wave));
