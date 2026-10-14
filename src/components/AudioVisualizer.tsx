@@ -82,7 +82,7 @@ export default function AudioVisualizer({ onResetToHome }: AudioVisualizerProps)
     const baseUrl = import.meta.env.BASE_URL || '/';
     const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
     const audioSrc = `${cleanBase}Audiofile/Lastopt.mp3`;
-    const audio = new Audio(audioSrc);
+    const audio = new Audio(`${import.meta.env.BASE_URL}Audiofile/Lastopt.mp3`);
     audio.preload = 'auto';
     audio.addEventListener('ended', handleAudioEnd);
     audioElementRef.current = audio;
