@@ -77,9 +77,12 @@ export default function AudioVisualizer({ onResetToHome }: AudioVisualizerProps)
     return t;
   };
 
-  // Setup Audiofile/Thisthing.wav
+  // Setup Audiofile/Ready_V3.wav
   useEffect(() => {
-    const audio = new Audio(`${import.meta.env.BASE_URL}Audiofile/Thisthing.wav`);
+    const baseUrl = import.meta.env.BASE_URL || '/';
+    const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+    const audioSrc = `${cleanBase}Audiofile/Ready_V3.wav`;
+    const audio = new Audio(audioSrc);
     audio.preload = 'auto';
     audio.addEventListener('ended', handleAudioEnd);
     audioElementRef.current = audio;
@@ -144,7 +147,7 @@ export default function AudioVisualizer({ onResetToHome }: AudioVisualizerProps)
     if (isEndingRef.current) return;
     isEndingRef.current = true;
 
-    // Thisthing.wav 음원 강제 끝맞춤하여 스킵
+    // Ready_V3.wav 음원 강제 끝맞춤하여 스킵
     if (audioElementRef.current) {
       audioElementRef.current.pause();
       try {
@@ -188,7 +191,7 @@ export default function AudioVisualizer({ onResetToHome }: AudioVisualizerProps)
     setStatusText('Drop 타이밍에 맞춰 버튼을 눌러주세요!');
     setIsPlaying(true);
 
-    // 2. Setup AudioContext and Analyser connected to Thisthing.wav
+    // 2. Setup AudioContext and Analyser connected to Ready_V3.wav
     try {
       const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (!audioContextRef.current) {
@@ -278,7 +281,7 @@ export default function AudioVisualizer({ onResetToHome }: AudioVisualizerProps)
           dataArray[i] = Math.min(255, Math.floor(avg * 1.3));
         }
       } else {
-        // Idle subtle dot pulse before Thisthing.wav plays
+        // Idle subtle dot pulse before Ready_V3.wav plays
         for (let i = 0; i < barCount; i++) {
           const wave = Math.sin(frame * 0.05 + i * 0.4) * 16 + 20;
           dataArray[i] = Math.max(0, Math.min(255, wave));
